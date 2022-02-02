@@ -93,7 +93,13 @@ def remove_items(db,id):
     data["items"] = items
     
     db.collection("users").document(id).set(data)
-    
+
+"""
+Get User Info:
+This function will prompt the user for their email and password, it will then 
+see if it is in the database. if it is it will return the users id, if it is not
+it will ask the user if they would like to create an account. 
+"""   
 def get_user_info(db):
     keep_going = False
     while not keep_going:

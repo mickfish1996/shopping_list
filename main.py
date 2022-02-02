@@ -94,6 +94,21 @@ def remove_items(db,id):
     
     db.collection("users").document(id).set(data)
 
+def create_account(email, password, db):
+    data = {}
+    data["email"] = email
+    data["password"] = password
+    data["items"] = {}
+
+    db.collection("users").add(data)
+
+    results = db.collection("users").where("email", "==", email).where("password", "==", password)
+
+    id = None
+    for result in results:
+        id = result.id
+    return id
+
 """
 Get User Info:
 This function will prompt the user for their email and password, it will then 
@@ -118,6 +133,12 @@ def get_user_info(db):
         except:
             print("Error: user not in the system!")
             create = input("Would you like to create an account? [y/n]: ")
+
+            if create == "y":
+                id = create_account(email, password)
+                return id
+
+
     
     
 """

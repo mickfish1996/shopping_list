@@ -25,8 +25,8 @@ This function will only display the items that the user has in the list,
 and it will only display the items that have a value greater than 0 
 assciated with them.
 """    
-def view_in_list(db):
-    result = db.collection("shopping_list").document("food").get()
+def view_in_list(db,id):
+    result = db.collection("users").document(id).get()
     data = result.to_dict()
     
     items = data["items"]
@@ -34,7 +34,7 @@ def view_in_list(db):
     print("\nShopping List")
     print("___________________________________")
     for item in items:
-        if items[item] != 0:
+        if items[item] > 0:
             print(f"{i}. {item}: {items[item]}")
             i += 1
         
@@ -45,8 +45,8 @@ Add Items:
 This function will take items that the user would like to add to the list and will
 send it up to the cloud data base.
 """        
-def add_items(db):
-    results = db.collection("shopping_list").document("food").get()
+def add_items(db,id):
+    results = db.collection("users").document(id).get()
     
     data = results.to_dict()
     items = data["items"]
@@ -58,15 +58,15 @@ def add_items(db):
     items[item.capitalize()] = num
     data["items"] = items
     
-    db.collection("shopping_list").document("food").set(data)  
+    db.collection("users").document(id).set(data)  
     
 """
 Remove items:
 This function will display the items in the list and will prompt the user for the Item
 that they would like to set the value associated with the item to zero.
 """
-def remove_items(db):
-    results = db.collection("shopping_list").document("food").get()
+def remove_items(db,id):
+    results = db.collection("users").document(id).get()
     
     data = results.to_dict()
     items = data["items"]
@@ -92,7 +92,27 @@ def remove_items(db):
     
     data["items"] = items
     
-    db.collection("shopping_list").document("food").set(data)
+    db.collection("users").document(id).set(data)
+    
+def get_user_info(db):
+    keep_going = False
+    while not keep_going:
+        email = input("Email: ")
+        password = input("Password: ")
+        
+        results = db.collection("users").where("email", "==", email).where("password", "==", password).get()
+        
+        try:
+            for result in results:
+                id = result.id
+                data = db.collection("users").document(id).get()
+                keep_going = True
+                return id
+            
+        except:
+            print("Error: user not in the system!")
+            create = input("Would you like to create an account? [y/n]: ")
+    
     
 """
 Main:
@@ -102,6 +122,7 @@ that db to what ever function wants to access.
 """    
 def main():
     db = init_database()
+    id = get_user_info(db)
     keep_going = True
     while keep_going:
         print("\n\t   SHOPPING LIST")
@@ -111,13 +132,13 @@ def main():
         try:
             choice = int(input("1. View list\n2. Add to list\n3. Remove From list\n4. Exit\n\nChoice: "))
             if choice == 1:
-                view_in_list(db)
+                view_in_list(db,id)
             
             elif choice == 2:
-                add_items(db)
+                add_items(db,id)
                 
             elif choice == 3:
-                remove_items(db)
+                remove_items(db,id)
                 
             elif choice == 4:
                 keep_going = False
@@ -126,7 +147,7 @@ def main():
                 print("incorrect number enterd.")
                 
         except:
-            print("Error: Please enter a number")
+            print("Error: Please enter a valid number")
     
 
 if __name__ == "__main__":

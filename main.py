@@ -106,14 +106,18 @@ def create_account(email, password, db):
     data["password"] = password
     data["items"] = {}
 
-    db.collection("users").add(data)
+    try:
+        db.collection("users").doc().set(data)
 
-    results = db.collection("users").where("email", "==", email).where("password", "==", password)
+        results = db.collection("users").where("email", "==", email).where("password", "==", password).get()
 
-    id = None
-    for result in results:
-        id = result.id
-    return id
+
+        id = None
+        for result in results:
+            id = result.id
+        return id
+    except: 
+        print("Failed to create user")
 
 """
 Get User Info:
@@ -123,26 +127,28 @@ it will ask the user if they would like to create an account.
 """   
 def get_user_info(db):
     keep_going = False
-    while not keep_going:
-        email = input("Email: ")
-        password = input("Password: ")
-        
-        results = db.collection("users").where("email", "==", email).where("password", "==", password).get()
-        
+    while not keep_going: 
+        email = None
+        password = None
         try:
+            email = input("Email: ")
+            password = input("Password: ")
+        
+            results = db.collection("users").where("email", "==", email).where("password", "==", password).get()
+            id = None
             for result in results:
                 id = result.id
                 data = db.collection("users").document(id).get()
                 keep_going = True
-                return id
+            return id
             
         except:
             print("Error: user not in the system!")
             create = input("Would you like to create an account? [y/n]: ")
 
-            if create == "y":
-                id = create_account(email, password)
-                return id
+            # if create == "y":
+            #     id = create_account(email, password)
+            #     return id
 
 
     

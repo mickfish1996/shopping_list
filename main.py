@@ -154,18 +154,16 @@ def get_user_info(db):
             if create == "y":
                 id = create_account(email, password, db)
                 return id
+            else:
+                return id
 
 
     
 """
-Main:
+Run Program:
 This function will prompt the user for what they would like to do
-it will also call in the db from init_database. it will then pass
-that db to what ever function wants to access.
-"""    
-def main():
-    db = init_database()
-    id = get_user_info(db)
+"""
+def run_program(db, id):
     keep_going = True
     while keep_going:
         print("\n\t   SHOPPING LIST")
@@ -190,7 +188,22 @@ def main():
                 print("incorrect number enterd.")
                 
         except:
-            print("Error: Please enter a valid number")
+            print("Error: Please enter a valid number")   
+"""
+Main:
+This function will get the user database from init database
+and it will get the id of the document that the user is going to
+be useing, if the id is there then it sends it on to run program
+otherwise it will exit the program.
+"""
+def main():
+    db = init_database()
+    id = get_user_info(db)
+    if id != None:
+        run_program(db, id)
+    else:
+        print("Goodbye!")
+    
     
 
 if __name__ == "__main__":

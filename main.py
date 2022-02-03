@@ -152,7 +152,6 @@ def get_user_info(db):
 
 
     
-    
 """
 Main:
 This function will prompt the user for what they would like to do

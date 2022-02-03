@@ -107,7 +107,7 @@ def create_account(email, password, db):
     data["items"] = {}
 
     try:
-        db.collection("users").doc().set(data)
+        db.collection("users").add(data)
 
         results = db.collection("users").where("email", "==", email).where("password", "==", password).get()
 
@@ -115,6 +115,8 @@ def create_account(email, password, db):
         id = None
         for result in results:
             id = result.id
+
+        result = db.collection("users").document(id).get()
         return id
     except: 
         print("Failed to create user")
@@ -136,19 +138,22 @@ def get_user_info(db):
         
             results = db.collection("users").where("email", "==", email).where("password", "==", password).get()
             id = None
+            data = None
             for result in results:
                 id = result.id
                 data = db.collection("users").document(id).get()
                 keep_going = True
-            return id
+
+            if data.exists:
+                return id
             
         except:
             print("Error: user not in the system!")
             create = input("Would you like to create an account? [y/n]: ")
 
-            # if create == "y":
-            #     id = create_account(email, password)
-            #     return id
+            if create == "y":
+                id = create_account(email, password, db)
+                return id
 
 
     

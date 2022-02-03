@@ -130,3 +130,4 @@ dmypy.json
 
 # Web Keys
 *.json
+get_key.py

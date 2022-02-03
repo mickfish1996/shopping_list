@@ -94,6 +94,12 @@ def remove_items(db,id):
     
     db.collection("users").document(id).set(data)
 
+"""
+Create Account:
+This function will create a dictionary with the values that the user input earlier,
+and will set them as the user name and password that are being used. and will then
+return the id of that new document item.
+"""
 def create_account(email, password, db):
     data = {}
     data["email"] = email

@@ -26,6 +26,5 @@ I wanted it to do.
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
 * [Firebase documentation](https://firebase.google.com/docs/firestore)
 * [Stack Overflow](https://stackoverflow.com)

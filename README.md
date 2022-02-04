@@ -1,22 +1,31 @@
 # Shopping List
-{Important!  Do not say in this section that this is college assignment.  Talk about what you are trying to accomplish as a software engineer to further your learning.}
+This Repository was for me to play around with cloud data bases and to learn how they work and learn how to use them.
 
-{Provide a description of your software}
-
-{Describe your purpose for creating this software.}
-
-{Provide a link to your YouTube demonstration.  It should be a one minute demo of the software running and a walkthrough of the code.}
+What I did for this was create a shopping list program. What it does
+is it uses the key that I had generated and it accesses the data base
+Then whenever I am displaying items it queries the data base and will
+display any item that does not have the value of zero attached to it.
+Also I can select the write to data base function which will allow the 
+user to add items to the shopping list. I can also remove items from the 
+shopping list by setting the value associated with it to zero. There are also
+the ability to have multiple users where each user will only have access to the
+data that is associated with their account.
 
 [Software Demo Video](http://youtube.link.goes.here)
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
+What I used for this assignmet was
+* VS Code
+* Google Firestore
 
-{Describe the programming language that you used}
+### languae
+The language that I used for this was python. Even though python does not have the
+most support for firebase because it is outdated It was still able to do what
+I wanted it to do.
 
 # Useful Websites
 
 {Make a list of websites that you found helpful in this project}
-* [Web Site Name](http://url.link.goes.here)
-* [Web Site Name](http://url.link.goes.here)
+* [Firebase documentation](https://firebase.google.com/docs/firestore)
+* [Stack Overflow](https://stackoverflow.com)

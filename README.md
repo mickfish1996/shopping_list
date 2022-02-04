@@ -19,7 +19,7 @@ What I used for this assignmet was
 * VS Code
 * Google Firestore
 
-### languae
+### language
 The language that I used for this was python. Even though python does not have the
 most support for firebase because it is outdated It was still able to do what
 I wanted it to do.

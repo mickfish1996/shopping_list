@@ -11,7 +11,7 @@ shopping list by setting the value associated with it to zero. There are also
 the ability to have multiple users where each user will only have access to the
 data that is associated with their account.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/q74OmQSFKiI)
 
 # Development Environment
 

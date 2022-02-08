@@ -28,3 +28,9 @@ I wanted it to do.
 
 * [Firebase documentation](https://firebase.google.com/docs/firestore)
 * [Stack Overflow](https://stackoverflow.com)
+
+# Future Work
+
+* Create an option to decrease by a certain value, not go straight to zero
+* Create a UI outside of terminal
+* add to an app
